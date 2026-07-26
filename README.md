@@ -19,7 +19,7 @@ uv sync
 uv run src/extract.py
 
 Output:
-
+```
 {
   "sender_name": "Priya Raman",
   "sender_email": "priya.raman@northwind.co",
@@ -31,7 +31,7 @@ Output:
     "Sai"
   ]
 }
-
+```
 ### Observations
 
 - we got the deadline as null instead of 2026-08-14
@@ -47,7 +47,7 @@ Let's try to add some field validators to our schema and try to implement retry 
 ## Test - 2
 
 Output:
-
+```
 {
   "sender_name": "Priya Raman",
   "sender_email": "priya.raman@northwind.co",
@@ -59,11 +59,11 @@ Output:
     "Walk through the Q3 budget for 30 minutes on Thursday. Update headcount figures and sign off on vendor invoice."
   ]
 }
-
+```
 ## Now lets add accuracy.py which will give us the test results with field-by-field accuracy
 
 Output:
-
+```
 Scored 46 docs
 
 sender_name: 45/46
@@ -117,6 +117,7 @@ Misses:
   meeting_requested 025: False -> True
   meeting_requested 045: False -> True
   deadline 038: None -> '2026-10-31'
+ ```
   
 All the fields looks good except urgency and category.
 
@@ -127,7 +128,7 @@ And by observing the tests, the llama3.2:2B model is good at extraction. But, wh
 So, Now, I wanted to connect a model which is bigger than llama3.2:2B and observe the result.
 
 Output:
-
+```
 Scored 50 docs
 
 sender_name: 49/50
@@ -155,10 +156,12 @@ Misses:
   deadline 019: None -> '2026-07-05'
   deadline 034: None -> '2026-04-22'
   deadline 038: None -> '2026-10-31'
+ ```
   
 
 The results look good. There's a lot of improvement on the reasoning/judgement based fields. But, we did notice a slight reduction in deadline field.
 
+```
 Field				Ollama (46 docs)	OpenAI (50 docs)	
 sender_email		100%	100%	flat (extraction, saturated)
 meeting_requested	95.7%	100%	↑
@@ -167,6 +170,7 @@ urgency				39.1%	90%	↑↑ huge
 action_items		47.5%	74.7%	↑↑ huge
 category			78.3%	92%	↑
 deadline			97.8%	88%	↓ regressed!
+```
 
 And also, i don't judge the model on just this deadline field as I wasn't that clear on the deadline description in the Pydantic schema.
 
