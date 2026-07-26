@@ -163,13 +163,13 @@ The results look good. There's a lot of improvement on the reasoning/judgement b
 
 ```
 Field				Ollama (46 docs)	OpenAI (50 docs)	
-sender_email		100%	100%	flat (extraction, saturated)
-meeting_requested	95.7%	100%	↑
-sender_name			97.8%	98%	flat
-urgency				39.1%	90%	↑↑ huge
-action_items		47.5%	74.7%	↑↑ huge
-category			78.3%	92%	↑
-deadline			97.8%	88%	↓ regressed!
+sender_email		100%				100%				flat (extraction, saturated)
+meeting_requested	95.7%				100%				↑
+sender_name			97.8%				98%					flat
+urgency				39.1%				90%					↑↑ huge
+action_items		47.5%				74.7%				↑↑ huge
+category			78.3%				92%					↑
+deadline			97.8%				88%					↓ regressed!
 ```
 
 And also, i don't judge the model on just this deadline field as I wasn't that clear on the deadline description in the Pydantic schema.
